@@ -22,9 +22,9 @@ class TraceAppRepository(Repository):
         for i in range(total_batch):
             offset = i * batch_size
             query = f'' \
-                    f'SELECT id, (endTimestamp - startTimestamp) as timeSpent FROM ( ' \
+                    f'SELECT id, (endTimestamp - startTimestamp) as duration FROM ( ' \
                     f'SELECT id, endTimestamp, startTimestamp FROM apptrace LIMIT {batch_size} OFFSET {offset}' \
-                    f') ORDER BY timeSpent DESC LIMIT {number_of_records}'
+                    f') ORDER BY duration DESC LIMIT {number_of_records}'
             rows = self.cursor.execute(query).fetchall()
             for row in rows:
                 if pq.size() < number_of_records:
@@ -33,9 +33,7 @@ class TraceAppRepository(Repository):
                     if row[1] > pq.get_items()[0][1]:
                         pq.add(row[0], row[1])
 
-            # Print progress information
             processedCount = offset + batch_size if (offset + batch_size) < total_records_count else total_records_count
-
             # print(f'Processed {processedCount} records out of {total_records_count}')
             if processedCount >= total_records_count:
                 break

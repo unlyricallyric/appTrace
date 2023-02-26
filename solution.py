@@ -16,7 +16,7 @@ appTraceRepo = TraceAppRepository(conn)
 
 # Set a batch size for batch processing
 batch_size = 1000
-number_of_records = 2
+number_of_records = 1
 
 slowest_record_info = appTraceRepo.get_slowest_records_info(batch_size, number_of_records)
 
