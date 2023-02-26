@@ -1,12 +1,10 @@
-import sqlite3
+from database.database import Database
+from database.database_type import DatabaseType
+from repository.traceApp_repository import TraceAppRepository
 
-from TraceAppRepository import TraceAppRepository
-from database import Database
-
-conn = sqlite3.connect('apptrace.db')
-
-db = Database(TraceAppRepository)
-
+sqlite_params = 'apptrace.db'
+db = Database(DatabaseType.sqlite, sqlite_params, 1)
+conn = db.sqlite_db.acquire()
 appTraceRepo = TraceAppRepository(conn)
 
 batch_size = 3
