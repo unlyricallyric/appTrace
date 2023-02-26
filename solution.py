@@ -2,13 +2,23 @@ from database.database import Database
 from database.database_type import DatabaseType
 from repository.traceApp_repository import TraceAppRepository
 
-sqlite_params = 'apptrace.db'
-db = Database(DatabaseType.sqlite, sqlite_params, 1)
+database_params = 'apptrace.db'
+
+# initialize database instance with a max connection
+max_connections = 2
+db = Database(DatabaseType.sqlite, database_params, max_connections)
+
+# get a connection from pool
 conn = db.sqlite_db.acquire()
+
+# initialize repository
 appTraceRepo = TraceAppRepository(conn)
 
-batch_size = 3
+# Set a batch size for batch processing
+batch_size = 1000
+number_of_records = 2
 
-max_value = appTraceRepo.batch_get_slowest_app(batch_size)
+slowest_record_info = appTraceRepo.get_slowest_records_info(batch_size, number_of_records)
 
-print(max_value)
+# release connection
+db.sqlite_db.release(conn)
