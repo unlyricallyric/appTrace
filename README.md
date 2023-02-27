@@ -5,6 +5,7 @@
 - Extensible to support different type of database
 - Flexibility in terms of querying the slowest records
 - Customized PriorityQueue for better handling records set
+- Flexible records sort and operations
 
 
 [Optional] Parting Question:

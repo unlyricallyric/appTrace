@@ -7,13 +7,13 @@ class Record:
         self.data = json.loads(self.get_data())
         self.id = record[0]
         self.action = self.get_action()
-        self.operation_time = self.get_operation_time()
+        self.duration = self.get_duration()
         self.last_operation = self.get_last_operation()
 
     def get_id(self):
         return self.record[0]
 
-    def get_operation_time(self):
+    def get_duration(self):
         return int(self.record[2]) - int(self.record[1])
 
     def get_data(self):
