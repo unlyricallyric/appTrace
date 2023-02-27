@@ -21,4 +21,4 @@ number_of_records = 1
 slowest_record_info = appTraceRepo.get_slowest_records_info(batch_size, number_of_records)
 
 # release connection
-db.sqlite_db.release(conn)
+db.sqlite_db.close_all()
