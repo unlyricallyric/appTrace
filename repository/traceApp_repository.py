@@ -1,5 +1,5 @@
 from model.record import Record
-from priority_queue import PriorityQueue
+from priority_queue.priority_queue import PriorityQueue
 from repository.repository import Repository
 from utils.records_opration import sort_records_by_duration, get_app_info_by_records
 
